@@ -1,0 +1,975 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 929,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `addRecordToList` or `deleteRecordFromList` or `updateCrmRecord` !=`Response` or `async` or `w2c` | json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "UPLOAD_SINGLE USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}`|= `addToList`  \r\nor `deleteAllFromList`  \r\nor `deleteFromContacts`  \r\nor `deleteFromList`  \r\nor `updateContacts`  \r\nor `updateDispositions`  \r\n\r\n!=`Response`| json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "UPLOAD USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `getAgentAuditReport` or `getCallLogReport` or `runReport` != `Result` !=`Response` | json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "REPORT USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `getReportResult` !=`Response` | json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "RETRIEVE_REPORT USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `async` !=`Response` | json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "ASYNC_UPLOAD USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `acceptChatInvite` \r\nor `addDispositionsToCampaign` \r\nor `addDNISToCampaign` \r\nor `addListsToCampaign` \r\nor `addNumbersToDnc` \r\nor `addPromptTTS` \r\nor `addPromptWav` \r\nor `addPromptWavInline` \r\nor `addSkillsToCampaign` \r\nor `closeChatSession` \r\nor `createAgentGroup` \r\nor `createAutodialCampaign` \r\nor `createCallVariable` \r\nor `createCallVariablesGroup` \r\nor `createCampaignProfile` \r\nor `createChatSession` \r\nor `createContactField` \r\nor `createDisposition` \r\nor `createInboundCampaign` \r\nor `createIVRScript` \r\nor `createList` \r\nor `createOutboundCampaign` \r\nor `createReasonCode` \r\nor `createSkill` \r\nor `createSpeedDialNumber` \r\nor `createUser` \r\nor `createUserProfile` \r\nor `createWebConnector` \r\nor `deleteAgentGroup` \r\nor `deleteCallVariable` \r\nor `deleteCallVariablesGroup` \r\nor `deleteCampaign` \r\nor `deleteCampaignProfile` \r\nor `deleteContactField` \r\nor `deleteIVRScript` \r\nor `deleteList` \r\nor `deletePrompt` \r\nor `deleteReasonCode` \r\nor `deleteReasonCodeByType` \r\nor `deleteSkill` \r\nor `deleteUser` \r\nor `deleteUserProfile` \r\nor `deleteWebConnector` \r\nor `forceStopCampaign` \r\nor `getDispositionsNames` \r\nor `getLoggedInUsers` \r\nor `getMyGroupIds` \r\nor `getMyPermissions` \r\nor `getMySkillsIds` \r\nor `loginStation` \r\nor `modifyAgentGroup` \r\nor `modifyAutodialCampaign` \r\nor `modifyCallVariable` \r\nor `modifyCallVariablesGroup` \r\nor `modifyCampaignLists` \r\nor `modifyCampaignProfile` \r\nor `modifyCampaignProfileCrmCriteria` \r\nor `modifyCampaignProfileDispositions` \r\nor `modifyCampaignProfileFilterOrder` \r\nor `modifyContactField` \r\nor `modifyDisposition` \r\nor `modifyInboundCampaign` \r\nor `modifyIVRScript` \r\nor `modifyOutboundCampaign` \r\nor `modifyPromptTTS` \r\nor `modifyPromptWav` \r\nor `modifyPromptWavInline` \r\nor `modifyReasonCode` \r\nor `modifySkill` \r\nor `modifyUser` \r\nor `modifyUserCannedReports` \r\nor `modifyUserProfileSkills` \r\nor `modifyUserProfileUserList` \r\nor `modifyVCCConfiguration` \r\nor `modifyWebConnector` \r\nor `receiveMessages` \r\nor `reconnectStation` \r\nor `removeDisposition` \r\nor `removeDispositionsFromCampaign` \r\nor `removeDNISFromCampaign` \r\nor `removeListsFromCampaign` \r\nor `removeNumbersFromDnc` \r\nor `removeSkillsFromCampaign` \r\nor `removeSpeedDialNumber` \r\nor `removeUserFromChat` \r\nor `renameCampaign` \r\nor `renameDisposition` \r\nor `resetCampaign` \r\nor `resetCampaignDispositions` \r\nor `resetListPosition` \r\nor `sendBroadcastMessages` \r\nor `sendChatInvite` \r\nor `sendInfoMessage` \r\nor `sendMsgToChat` \r\nor `setDefaultIVRSchedule` \r\nor `setDialingRules` \r\nor `setSkillVoicemailGreeting` \r\nor `setUserVoicemailGreeting` \r\nor `startCampaign` \r\nor `startMonitoring` \r\nor `stopCampaign` \r\nor `stopMonitoring` \r\nor `userSkillAdd` \r\nor `userSkillModify` \r\nor `userSkillRemove` \r\n\r\n!=`Response` | json | logType = `vcc_apife_logs` [1m])) ",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "MODIFY USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 54
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}`  |= `getStatisticsUpdate` !=`Response` | json | logType = `vcc_apife_logs` [1m]))",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "QUERY_CHANGED_STAT USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `getColumnNames` or `getStatistics` or `setSessionParameters` !=`Response` or `getStatisticsUpdate` | json | logType = `vcc_apife_logs` [1m]))",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "QUERY_STAT USE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 72
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(minute) (count_over_time({service_name=\"vcc\", jurisdiction=\"${jurisdiction}\"} |= `${user}` |= `getSkill`  \r\nor `getAgent`  \r\nor `getCall`  \r\nor `getAutodialCampaign`  \r\nor `getCampaign`  \r\nor `getContact`  \r\nor `getCrmImportResult`  \r\nor `getDialingRules`  \r\nor `getDisposition`  \r\nor `getDNISList`  \r\nor `getInboundCampaign`  \r\nor `getIVRScripts`  \r\nor `getList`  \r\nor `getMonitoringSupervisors`  \r\nor `getOutboundCampaign`  \r\nor `getPrompt`  \r\nor `getReasonCode`  \r\nor `getReasonCodeByType`  \r\nor `getSessionParameters`  \r\nor `getSpeedDialNumbers`  \r\nor `getUser`  \r\nor `getVCCConfiguration`  \r\nor `getWebConnectors` \r\nor `checkDncForNumbers` \r\nor `closeSession`\r\nor `isImportRunning`\r\nor `isReportRunning`\r\n\r\n!=`Response` | json | logType = `vcc_apife_logs` [1m]))",
+          "queryType": "range",
+          "refId": "Count User API UPLOAD_SINGLE Requests per MIN"
+        }
+      ],
+      "title": "QUERY USE",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "loki_scl",
+          "value": "loki_scl"
+        },
+        "name": "datasource",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "dabella.com",
+          "value": "dabella.com"
+        },
+        "name": "user",
+        "options": [
+          {
+            "selected": true,
+            "text": "dabella.com",
+            "value": "dabella.com"
+          }
+        ],
+        "query": "dabella.com",
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "text": "us",
+          "value": "us"
+        },
+        "name": "jurisdiction",
+        "options": [
+          {
+            "selected": true,
+            "text": "us",
+            "value": "us"
+          },
+          {
+            "selected": false,
+            "text": "ca",
+            "value": "ca"
+          },
+          {
+            "selected": false,
+            "text": "eu",
+            "value": "eu"
+          },
+          {
+            "selected": false,
+            "text": "uk",
+            "value": "uk"
+          }
+        ],
+        "query": "us,ca,eu,uk",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "2025-04-25T07:00:00.000Z",
+    "to": "2025-04-26T06:59:59.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "America/Los_Angeles",
+  "title": "API_Classic_Usage_by_Category",
+  "uid": "cekm01lv5zdhcd",
+  "version": 27
+}

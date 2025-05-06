@@ -1,0 +1,305 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 939,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki_scl"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki_scl"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by (faultstring) (\r\n  count_over_time({service_name=\"vcc\", jurisdiction=\"us\"} |= `${username}` |= `faultstring` | json | logType = `vcc_apife_logs` | regexp `-\\d+\\)\\s\\{(?P<username>.*)@\\d+.*faultstring>(?P<faultstring>.*)<\\/faultstring.*message>(?P<error>.*)<\\/message` |faultstring=~`${fault_filter}.*` [1m]\r\n  )\r\n)",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Graph",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki_scl"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "username"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 166
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 196
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki_scl"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "{service_name=\"vcc\", jurisdiction=\"us\"} |= `${username}` |= `faultstring` | json | logType = `vcc_apife_logs` | regexp `-\\d+\\)\\s\\{(?P<username>.*)@\\d+.*faultstring>(?P<faultstring>.*)<\\/faultstring.*message>(?P<error>.*)<\\/message` |faultstring=~`${fault_filter}.*`",
+          "queryType": "range",
+          "refId": "APIFE Errors | US | User"
+        }
+      ],
+      "title": "Errors",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "source": "labels"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "includeByName": {
+              "Line": true,
+              "Time": true,
+              "error": true,
+              "faultstring": true,
+              "username": true
+            },
+            "indexByName": {
+              "Line": 1,
+              "Time": 0,
+              "error": 3,
+              "faultstring": 4,
+              "username": 2
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "salesforceapi@bofi.com",
+          "value": "salesforceapi@bofi.com"
+        },
+        "description": "",
+        "name": "username",
+        "options": [
+          {
+            "selected": true,
+            "text": "salesforceapi@bofi.com",
+            "value": "salesforceapi@bofi.com"
+          }
+        ],
+        "query": "salesforceapi@bofi.com",
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "includeAll": true,
+        "name": "fault",
+        "options": [],
+        "query": "",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "${fault:regex,/^(.*)$/,'\"\\1\"'}",
+          "value": "${fault:regex,/^(.*)$/,'\"\\1\"'}"
+        },
+        "hide": 2,
+        "name": "fault_filter",
+        "query": "${fault:regex,/^(.*)$/,'\"\\1\"'}",
+        "skipUrlSync": true,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "2025-05-02T07:00:00.000Z",
+    "to": "2025-05-03T06:59:59.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "America/Los_Angeles",
+  "title": "SOAP API Error | Classic",
+  "uid": "bekznxcqbdbswe",
+  "version": 18
+}
