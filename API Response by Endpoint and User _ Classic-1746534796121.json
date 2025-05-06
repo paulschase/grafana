@@ -1,0 +1,208 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 940,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "direction": "forward",
+          "editorMode": "code",
+          "expr": "sum by(username, endpoint) (count_over_time(\r\n  {jurisdiction=\"us\", service=\"vcc\"} \r\n  |= `${username}` \r\n  |= `Response` \r\n  | json \r\n  | logType = `vcc_apife_logs` \r\n  | regexp `-\\d+\\)\\s\\{(?P<username>.*)@10\\.\\d+.*(?P<endpoint>\\b\\w*Response\\b)`\r\n\r\n[1m]))\r\n",
+          "queryType": "range",
+          "refId": "API Responses per user"
+        }
+      ],
+      "title": "API Response by Endpoint and User | Classic",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "loki_scl",
+          "value": "loki_scl"
+        },
+        "name": "datasource",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "@tailor",
+          "value": "@tailor"
+        },
+        "name": "username",
+        "options": [
+          {
+            "selected": true,
+            "text": "@tailor",
+            "value": "@tailor"
+          }
+        ],
+        "query": "@tailor",
+        "type": "textbox"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "us",
+          "value": "us"
+        },
+        "name": "juristiction",
+        "options": [
+          {
+            "selected": true,
+            "text": "us",
+            "value": "us"
+          },
+          {
+            "selected": false,
+            "text": "ca",
+            "value": "ca"
+          },
+          {
+            "selected": false,
+            "text": "uk",
+            "value": "uk"
+          },
+          {
+            "selected": false,
+            "text": "eu",
+            "value": "eu"
+          }
+        ],
+        "query": "us,ca,uk,eu",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "2025-05-01T21:00:00.000Z",
+    "to": "2025-05-01T21:59:59.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "America/Los_Angeles",
+  "title": "API Response by Endpoint and User | Classic",
+  "uid": "eel2dg7sg4kcgb",
+  "version": 7
+}
